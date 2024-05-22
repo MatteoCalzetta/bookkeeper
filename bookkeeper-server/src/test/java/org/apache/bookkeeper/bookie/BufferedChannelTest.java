@@ -21,6 +21,8 @@ public class BufferedChannelTest {
     private BufferedChannel buffChannel;
     private File file;
 
+    //Dummy comment to trigger workflows
+
     @Before
     public void setUp() throws IOException {
         file = Files.createTempFile("test", ".tmp").toFile();
