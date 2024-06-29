@@ -25,7 +25,6 @@
   <artifactId>bookkeeper-server</artifactId>
   <name>Apache BookKeeper :: Server</name>
   <properties>
-    <ba-dua.version>0.6.0</ba-dua.version>
   </properties>
   <dependencies>
     <dependency>
@@ -429,11 +428,6 @@
       </properties> -->
       <!-- Needed for generate the report -->
       <dependencies>
-        <dependency>
-          <groupId>br.usp.each.saeg</groupId>
-          <artifactId>ba-dua-cli</artifactId>
-          <version>${ba-dua.version}</version>
-        </dependency>
       </dependencies>
       <build>
         <plugins>
@@ -450,12 +444,12 @@
                 </goals>
                 <configuration>
                   <artifactItems>
-                    <artifactItem>
+                    <!--<artifactItem>
                       <groupId>br.usp.each.saeg</groupId>
                       <artifactId>ba-dua-agent-rt</artifactId>
                       <classifier>all</classifier>
                       <version>${ba-dua.version}</version>
-                    </artifactItem>
+                    </artifactItem>-->
                   </artifactItems>
                 </configuration>
               </execution>
@@ -467,10 +461,10 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
-              <argLine>
+              <!---<argLine>
                 -javaagent:target/dependency/ba-dua-agent-rt-0.6.0-all.jar
                 -Doutput.file=target/badua.ser
-              </argLine>
+              </argLine>-->
             </configuration>
           </plugin>
 
