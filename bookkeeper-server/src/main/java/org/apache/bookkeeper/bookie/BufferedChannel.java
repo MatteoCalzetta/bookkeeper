@@ -134,7 +134,7 @@ public class BufferedChannel extends BufferedReadChannel implements Closeable {
             position += copied;
             if (doRegularFlushes) {
                 unpersistedBytes.addAndGet(copied);
-                if (unperfsistedBytes.get() >= unpersistedBytesBound) {
+                if (unpersistedBytes.get() >= unpersistedBytesBound) {
                     flush();
                     shouldForceWrite = true;
                 }
