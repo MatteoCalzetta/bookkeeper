@@ -45,7 +45,7 @@ public class BufferedChannel extends BufferedReadChannel implements Closeable {
     /**
      * The buffer used to write operations.
      */
-    protected final ByteBuf writeBuffer;
+    public final ByteBuf writeBuffer;
     /**
      * The absolute position of the next write operation.
      */
@@ -269,7 +269,7 @@ public class BufferedChannel extends BufferedReadChannel implements Closeable {
                 pos += bytesToCopy;
                 length -= bytesToCopy;
                 // let's read it
-            } else {
+                } else {
                 readBufferStartPosition = pos;
 
                 int readBytes = fileChannel.read(readBuffer.internalNioBuffer(0, readCapacity),

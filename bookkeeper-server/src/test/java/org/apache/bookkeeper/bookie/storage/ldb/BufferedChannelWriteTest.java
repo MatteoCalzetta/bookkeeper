@@ -1,8 +1,9 @@
-package org.apache.bookkeeper.bookie;
+package org.apache.bookkeeper.bookie.storage.ldb;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.buffer.UnpooledByteBufAllocator;
+import org.apache.bookkeeper.bookie.BufferedChannel;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
@@ -59,6 +60,7 @@ public class BufferedChannelWriteTest {
         NULL,
         INVALID
     }
+
     private STATE_OF_OBJ stateOfFc;
     private STATE_OF_OBJ stateOfSrc;
 
@@ -95,13 +97,23 @@ public class BufferedChannelWriteTest {
         writeInputTupleList.add(new WriteInputTuple(10, 10, STATE_OF_OBJ.INVALID, STATE_OF_OBJ.NOT_EMPTY, 0L, Exception.class));  //[11] fault of Fc == INVALID
         writeInputTupleList.add(new WriteInputTuple(10, 0, STATE_OF_OBJ.EMPTY, STATE_OF_OBJ.EMPTY, 0L, SUCCESS));                 //[12] src is empty, actually writing nothing
 
+        //after Jacoco report
+        //nothing to add, coverage was 100%
+
+        //after badua report
+        //writeInputTupleList.add(new WriteInputTuple(10,5,STATE_OF_OBJ.EMPTY,STATE_OF_OBJ.EMPTY,3L,SUCCESS));                       //
+        writeInputTupleList.add(new WriteInputTuple(10, 5, STATE_OF_OBJ.EMPTY, STATE_OF_OBJ.NOT_EMPTY, 3L, SUCCESS));            //[14] SUCCESS
+        writeInputTupleList.add(new WriteInputTuple(10, 5, STATE_OF_OBJ.EMPTY, STATE_OF_OBJ.NOT_EMPTY, 6L, SUCCESS));            //[15] SUCCESS
+
+        //after pit report
+
 
 
         return writeInputTupleList;
     }
 
     /**
-    * when 0 capacity maybe flush is triggered, not working and tries again creating an infinite loop ?
+     * when 0 capacity maybe flush is triggered, not working and tries again creating an infinite loop ?
      **/
 
     private static final class WriteInputTuple {
@@ -235,7 +247,7 @@ public class BufferedChannelWriteTest {
         return invalidByteBuf;
     }
 
-   @After
+    @After
     public void cleanupEachTime(){
         try {
             if(this.stateOfFc != STATE_OF_OBJ.NULL) {
@@ -250,7 +262,7 @@ public class BufferedChannelWriteTest {
         }
     }
 
-   @AfterClass
+    @AfterClass
     public static void cleanupOnce(){
         File newLogFileDirs = new File("/Users/matteocalzetta/Documents/BufChanWriteTest");
         deleteDirectoryRecursive(newLogFileDirs);
@@ -314,3 +326,6 @@ public class BufferedChannelWriteTest {
         }
     }
 }
+
+
+
